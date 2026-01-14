@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+
+    <table>
+        <thead>
+            <tr>
+                <td>Nom</td>
+                <td>Ingrédient secret</td>
+                <td>Option</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pizzas in pizza %}
+                <tr>
+                    <td>{{ pizzas.nom }}</td>
+                    <td>{{ pizzas.ingredient }}</td>
+                    <td class="option">
+                        <a href="{{path('pizza_update',{'id' : pizzas.id})}}">Modifier</a>
+                        <form method="POST" action="{{ path('delete_pizza', {'id': pizzas.id}) }}">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ pizzas.id)}}">
+                            <input type="submit" id="delete" value="Supprimer">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

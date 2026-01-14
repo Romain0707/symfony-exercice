@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PizzaAddController!{% endblock %}
+
+{% block body %}
+    <section id="pizza">
+        {{form_start(pizzaform)}}
+            {{form_widget(pizzaform)}}
+            <button>Créer</button>
+        {{form_end(pizzaform)}}
+    </section>
+{% endblock %}

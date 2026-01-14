@@ -1,0 +1,199 @@
+/* RESET CSS */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* FIN RESET CSS */
+
+#pizza form {
+    width: 100%;
+    margin: 3rem auto;
+    padding: 20px;
+    max-width: 750px;
+    background-color: #DCAB6B;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+#pizza form div {
+    display: flex;
+    flex-direction: column;
+}
+
+#pizza form label {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+}
+
+#pizza form input {
+    appearance: none;
+    border: none;
+    border: 1px solid #774E24;
+    height: 70px;
+    padding-inline: 1rem;
+    font-size: 28px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+#pizza form button {
+    font-size: 20px;
+    font-weight: bold;
+    appearance: none;
+    color: #DCAB6B;
+    background-color: #6E0D25;
+    border: 1px solid #774E24;
+    padding: 20px 50px;
+    border-radius: 8px;
+    align-self: center;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+table .option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+table input {
+    background-color: red;
+    font-size: 1rem;
+}
+
+table a {
+    background-color: orange;
+    font-size: 1rem;
+}
+
+table input, table a {
+    text-decoration: none;
+    appearance: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+body {
+    background-color: #FFFFB3;
+}
+
+header {
+    height: 10vh;
+    background-color: #DCAB6B;
+}
+
+header nav {
+    height: 100%;
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    height: 100%;
+}
+
+
+header nav ul li a {
+    text-decoration: none;
+    color: #6E0D25;
+    font-weight: bold;
+    font-size: 1.75rem;
+    text-transform: uppercase;
+}
+
+table {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    margin: 3rem auto;
+}
+
+table thead tr td{
+    background-color: #774E24;
+    padding: 10px 20px;
+}
+
+table tbody tr td{
+    padding: 10px 20px;
+}
+
+table tr:nth-child(2n+2) {
+    border-top: 1px solid #774E24;
+    border-bottom: 1px solid #774E24;
+}
+
+table tr:last-child {
+    border-bottom: 3px solid #774E24;
+}
+
+table td:not(:last-child) {
+    border-collapse: collapse;
+    border-right: 1px solid #774E24;
+    border-left: 1px solid #774E24;
+}
+
+table td:last-child {
+    border-right: 1px solid #774E24;
+}
