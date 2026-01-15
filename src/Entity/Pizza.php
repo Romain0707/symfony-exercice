@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PizzaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PizzaRepository::class)]
@@ -16,8 +18,19 @@ class Pizza
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $ingredient = null;
+    #[ORM\ManyToOne(inversedBy: 'pizzas')]
+    private ?Pate $pate = null;
+
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'pizzas')]
+    private Collection $ingredient;
+
+    public function __construct()
+    {
+        $this->ingredient = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -36,14 +49,38 @@ class Pizza
         return $this;
     }
 
-    public function getIngredient(): ?string
+    public function getPate(): ?Pate
+    {
+        return $this->pate;
+    }
+
+    public function setPate(?Pate $pate): static
+    {
+        $this->pate = $pate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getIngredient(): Collection
     {
         return $this->ingredient;
     }
 
-    public function setIngredient(string $ingredient): static
+    public function addIngredient(Ingredient $ingredient): static
     {
-        $this->ingredient = $ingredient;
+        if (!$this->ingredient->contains($ingredient)) {
+            $this->ingredient->add($ingredient);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): static
+    {
+        $this->ingredient->removeElement($ingredient);
 
         return $this;
     }

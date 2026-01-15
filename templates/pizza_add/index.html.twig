@@ -3,10 +3,18 @@
 {% block title %}Hello PizzaAddController!{% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
     <section id="pizza">
         {{form_start(pizzaform)}}
             {{form_widget(pizzaform)}}
             <button>Créer</button>
         {{form_end(pizzaform)}}
+        {{form(ingredientform)}}
     </section>
 {% endblock %}

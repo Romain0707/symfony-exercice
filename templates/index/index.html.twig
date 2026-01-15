@@ -14,20 +14,22 @@
         <thead>
             <tr>
                 <td>Nom</td>
-                <td>Ingrédient secret</td>
+                <td>Ingrédients</td>
+                <td>Type de pâte</td>
                 <td>Option</td>
             </tr>
         </thead>
         <tbody>
-            {% for pizzas in pizza %}
+            {% for pizza in pizzas %}
                 <tr>
-                    <td>{{ pizzas.nom }}</td>
-                    <td>{{ pizzas.ingredient }}</td>
+                    <td>{{ pizza.nom }}</td>
+                    <td>{{ pizza.ingredient|map(i => i.nom)|join(', ') }}</td>
+                    <td>{{ pizza.pate.nom }}</td>
                     <td class="option">
-                        <a href="{{path('pizza_update',{'id' : pizzas.id})}}">Modifier</a>
-                        <form method="POST" action="{{ path('delete_pizza', {'id': pizzas.id}) }}">
+                        <a href="{{path('pizza_update',{'id' : pizza.id})}}">Modifier</a>
+                        <form method="POST" action="{{ path('delete_pizza', {'id': pizza.id}) }}">
                             <input type="hidden" name="_method" value="delete">
-                            <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ pizzas.id)}}">
+                            <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ pizza.id)}}">
                             <input type="submit" id="delete" value="Supprimer">
                         </form>
                     </td>

@@ -2,33 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Pizza;
+use App\Entity\Pate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Pizza>
+ * @extends ServiceEntityRepository<Pate>
  */
-class PizzaRepository extends ServiceEntityRepository
+class PateRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Pizza::class);
-    }
-
-    public function findAllWithIngredients(): array
-    {
-        return $this->createQueryBuilder('p')
-            ->leftJoin('p.ingredient', 'i')
-            ->addSelect('i')
-            ->leftJoin('p.pate', 'pa')
-            ->addSelect('pa')
-            ->getQuery()
-            ->getResult();
+        parent::__construct($registry, Pate::class);
     }
 
 //    /**
-//     * @return Pizza[] Returns an array of Pizza objects
+//     * @return Pate[] Returns an array of Pate objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -42,7 +31,7 @@ class PizzaRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Pizza
+//    public function findOneBySomeField($value): ?Pate
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

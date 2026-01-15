@@ -2,22 +2,24 @@
 
 namespace App\Controller;
 
-use App\Entity\Pizza;
+use App\Entity\Pate;
+use App\Repository\IngredientRepository;
+use App\Repository\PateRepository;
 use App\Repository\PizzaRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class IndexController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index( PizzaRepository $pizzarepository): Response
+    public function index( PizzaRepository $pizzaRepository, IngredientRepository $ingredientRepository): Response
     {
-        $pizza = $pizzarepository->findAll();
+        $pizzas = $pizzaRepository->findAllWithIngredients();
+        $ingredient = $ingredientRepository->findAll();
         return $this->render('index/index.html.twig', [
-            'pizza' => $pizza,
+            'pizzas' => $pizzas,
+            'ingredient' => $ingredient,
         ]);
     }
 }
