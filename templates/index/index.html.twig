@@ -8,15 +8,15 @@
             {{ message }}
         </div>
     {% endfor %}
-
-
     <table>
         <thead>
             <tr>
                 <td>Nom</td>
                 <td>Ingrédients</td>
                 <td>Type de pâte</td>
+                {% if is_granted('ROLE_USER')%}
                 <td>Option</td>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -25,14 +25,18 @@
                     <td>{{ pizza.nom }}</td>
                     <td>{{ pizza.ingredient|map(i => i.nom)|join(', ') }}</td>
                     <td>{{ pizza.pate.nom }}</td>
+                    {% if is_granted('ROLE_USER')%}
                     <td class="option">
+                    {% if app.user.id == pizza.user.id %}
                         <a href="{{path('pizza_update',{'id' : pizza.id})}}">Modifier</a>
                         <form method="POST" action="{{ path('delete_pizza', {'id': pizza.id}) }}">
                             <input type="hidden" name="_method" value="delete">
                             <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ pizza.id)}}">
                             <input type="submit" id="delete" value="Supprimer">
                         </form>
+                    {% endif %}
                     </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

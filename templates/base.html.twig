@@ -10,7 +10,15 @@
             <nav>
                 <ul>
                     <li><a href="{{path('home')}}">Accueil</a></li>
+                    {% if is_granted('ROLE_USER')%}
                     <li><a href="{{path('pizza_add')}}">Ajouter une pizza</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_USER') == false %}
+                    <li><a href="{{path('app_login')}}">Connexion</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_USER')%}
+                    <li><a href="{{path('app_logout')}}">Deconnexion</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>

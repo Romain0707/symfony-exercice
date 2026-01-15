@@ -27,6 +27,9 @@ class Pizza
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'pizzas')]
     private Collection $ingredient;
 
+    #[ORM\ManyToOne(inversedBy: 'pizzas')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->ingredient = new ArrayCollection();
@@ -81,6 +84,18 @@ class Pizza
     public function removeIngredient(Ingredient $ingredient): static
     {
         $this->ingredient->removeElement($ingredient);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

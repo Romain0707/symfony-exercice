@@ -168,6 +168,8 @@ table {
     max-width: 800px;
     padding: 20px;
     margin: 3rem auto;
+    border: 1px solid #774E24;
+    border-collapse: collapse;
 }
 
 table thead tr td{
@@ -192,8 +194,4 @@ table td:not(:last-child) {
     border-collapse: collapse;
     border-right: 1px solid #774E24;
     border-left: 1px solid #774E24;
-}
-
-table td:last-child {
-    border-right: 1px solid #774E24;
 }

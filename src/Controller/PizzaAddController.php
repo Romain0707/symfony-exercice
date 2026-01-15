@@ -8,14 +8,15 @@ use App\Form\IngredientType;
 use App\Form\PizzaType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class PizzaAddController extends AbstractController
 {
-    #[Route('/pizzaadd', name: 'pizza_add')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/pizza/add', name: 'pizza_add')]
+    public function index(Security $security, Request $request, EntityManagerInterface $entityManager): Response
     {
         $pizza = new Pizza();
 
@@ -28,6 +29,8 @@ final class PizzaAddController extends AbstractController
         $formIngredient->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            
+            $pizza->setUser($security->getUser());
 
             $entityManager->persist($pizza);
 

@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Pizza;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -12,9 +14,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class PizzaDeleteController extends AbstractController
 {
     #[Route('/pizza/delete/{id}', name: 'delete_pizza')]
-    public function delete( Pizza $pizza, Request $request, EntityManagerInterface $entityManager): Response
+    public function delete(Security $security, Pizza $pizza,Request $request, EntityManagerInterface $entityManager): Response
     {
-        if($this->isCsrfTokenValid("SUP". $pizza->getId(),$request->get('_token'))) {
+        if($this->isCsrfTokenValid("SUP". $pizza->getId(),$request->get('_token')) && $security->getUser()->getId() == $pizza->getUser()) {
             $entityManager->remove($pizza);
             $entityManager->flush();
             $this->addFlash("success","La suppression a été effectuée");

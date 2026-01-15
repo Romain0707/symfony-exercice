@@ -8,6 +8,7 @@ use App\Form\IngredientType;
 use App\Form\PizzaType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,9 +16,8 @@ use Symfony\Component\Routing\Attribute\Route;
 final class PizzaUpdateController extends AbstractController
 {
     #[Route('/pizza/update/{id}', name: 'pizza_update')]
-    public function modify(Pizza $pizza, Request $request, EntityManagerInterface $entityManager): Response
+    public function modify(Security $security, Pizza $pizza, Request $request, EntityManagerInterface $entityManager): Response
     {
-
         $ingredient = new Ingredient();
 
         $form = $this->createForm(PizzaType::class, $pizza);
@@ -26,7 +26,7 @@ final class PizzaUpdateController extends AbstractController
         $form->handleRequest($request);
         $formIngredient->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid() && $security->getUser()->getId() == $pizza->getUser()->getId()) {
 
             $entityManager->persist($pizza);
 
@@ -46,7 +46,7 @@ final class PizzaUpdateController extends AbstractController
             $this->addFlash('success', 'Ingredient ajouté avec succès');
         }
 
-        return $this->render('pizza_add/index.html.twig', [
+        return $this->render('pizza_update/index.html.twig', [
             'pizzaform' => $form->createView(),
             'ingredientform' => $formIngredient->createView(),
         ]);
